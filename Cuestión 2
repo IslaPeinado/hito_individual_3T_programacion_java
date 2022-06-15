@@ -1,0 +1,124 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
+ */
+
+package com.mycompany.cuestion2;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.Scanner;
+
+
+
+
+/**
+ *
+ * @author islap
+ */
+public class Cuestion2 {
+
+    public static void main(String[] args) {
+        //declarar variables
+        int posicoin=0;
+        int count=0;
+        int acierto=1 ;
+        float error=0.25f;
+        float puntos = 0f;
+        String respuestaPersona;
+        String pregunta;
+        String respuesta;
+        
+        //crear arrays para almacenar informacion
+        //contienre preguntas y respuestas
+        ArrayList<String> archivo = new ArrayList<>(); 
+        //contiene el indice
+        ArrayList<Integer> azar = new ArrayList<>();
+        
+        try {
+            //lee el archivo
+            Scanner sc = new Scanner(Cuestion2.class.getResourceAsStream("archivo.txt"));
+            //le la respuesta de la persona
+            Scanner rpc = new Scanner(System.in);
+            
+            //introducimos los datos del archivo a traves del sc al array
+            while (sc.hasNext()){
+                //prerguntas respuestas
+                archivo.add(sc.nextLine());
+                //indice
+                if(posicoin%2 == 0)
+                    azar.add(posicoin);  
+                
+                posicoin++;
+            }
+
+            //mezcla el indice
+            Collections.shuffle(azar);
+            //metemos las preguntas al azar en un iterartor para facilitar la ejecucion de codigo
+            Iterator <Integer> preguntasAzar = azar.iterator();
+ 
+            //aqui le estoy diciendo que mientras que tenga preguntas repite la ación
+            while(preguntasAzar.hasNext()){
+                
+                //a la variable posicion le asignamos el valor de las preguntas al azar 
+                posicoin=preguntasAzar.next();
+                
+                //le decimos al programa como sacar la pregunta y la respuesta de forma aleatoria, pero para cada pregunta le sigue
+                //correspondiendo la repuesta que hay en el archivo.txt
+                pregunta = archivo.get(posicoin);
+                respuesta = archivo.get(posicoin + 1);
+                
+                //mostramos la pregunta
+                System.out.println(pregunta);
+                //leemos la respueta del humano
+                respuestaPersona = rpc.nextLine();
+                
+                
+                
+                if(respuestaPersona.equalsIgnoreCase(respuesta)){
+                    //le decimos que ha acertado
+                    System.out.println("Acertaste +"+acierto+".");
+                    //los puyntos del acierto a la vez le sumamos el valor del acierto 
+                    puntos += acierto;
+                    //añadimos una vuelta al contador el cual lo necesitaremo mas a de lante
+                    count++;
+                }else{
+                    //le decimos que si la persona que ha fallado
+                    System.out.println("Fallaste -"+error+".");
+                    //mostramos la respuesta correcta
+                    System.out.println("La respuesta correcta es "+respuesta+".");
+                    //a los puntos del error a la vez le restamos el valor del error 
+                    puntos -= error;
+                    //añadimos una vuelta al contador el cual lo necesitaremo mas a de lante
+                    count++;
+                }
+            }
+            
+            //mostramos los puntos obtenidos
+            System.out.println("___________________________________________");
+            System.out.println("Has sacado un:"+puntos);
+            
+            //a partir de los punto obtenidos le digo que de la mitad de las preguntas para abajo ha suspendido y de la mitad para arriba a aprovado
+            if(puntos >= count/2)
+                System.out.println("Aporovaste");
+            else
+                System.out.println("Suspendiste");
+            
+            //cierro los scanner a pesar de que en la version de java que utilizo no es necesario prefiero evitar errores
+            sc.close();
+            rpc.close();
+            
+        } catch (NullPointerException e1) {
+            //mostramos si el error es del archivo nos sale el siguiente mensaje
+            System.out.println("No se encuetra el archivo");
+        }catch (Exception e2){
+            //sino mostramos este otro tipo de error
+            System.out.println(e2);
+        }
+        
+        
+
+        
+    }
+}

@@ -1,0 +1,79 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package apartado3;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Map;
+import java.util.Queue;
+import java.util.Stack;
+
+/**
+ *
+ * @author islap
+ */
+public class Coleciones {
+    public static void main(String[] args) {
+        //Coleciones
+            //Lista: (ArrayList)
+                try{
+                    ArrayList<String> animales1 = new ArrayList<>(4);
+                    
+                    animales1.add("Perro");
+                    animales1.add("Gato");
+                    animales1.add("Conejo");
+                    animales1.add("Zorro");
+                    
+                    for(String animales : animales1){
+                        System.out.println(animales);
+                    }
+                    
+                }catch(Exception e){
+                    System.out.println("Exepcion "+e.getMessage());
+                }
+
+
+            //Pila: (stack)
+                try{
+                    Stack fruta1 = new Stack();
+                    fruta1.push("Melon");
+                    fruta1.push("Sandia");
+                    fruta1.push("Limon");
+                    
+                    System.out.println(fruta1.pop());
+                    
+                }catch(Exception e){
+                    System.out.println("Exepcion "+e.getMessage());
+                }
+
+
+            //Cola: (queue)
+                try{
+                    Queue<String> referescos1 = new LinkedList<String>();
+                    referescos1.add("Fanta de naranja");
+                    referescos1.add("Fanta de limon");
+                    referescos1.add("Cocacola");
+                    
+                    System.out.println(referescos1.poll());
+                    
+                }catch(Exception e){
+                    System.out.println("Exepcion "+e.getMessage());
+                }
+
+
+            //Tabla: (map)
+                try{
+                    Map<Integer, String> colores1 = new HashMap<Integer, String>();
+                    colores1.put(1, "Alvaro");
+                    colores1.put(2, "Ruben");
+                    colores1.put(3, "Carlos");
+                    System.out.println(colores1);
+                    
+                }catch(Exception e){
+                    System.out.println("Exepcion "+e.getMessage());
+                }
+    }
+}
